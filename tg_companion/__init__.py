@@ -98,7 +98,7 @@ proxy_username = USERNAME
 proxy_password = PASSWORD
 if PROXY_TYPE:
     if PROXY_TYPE == "HTTP":
-        porxy_type = socks.HTTP
+        proxy_type = socks.HTTP
     elif PROXY_TYPE == "SOCKS4":
         proxy_type = socks.SOCKS4
     elif PROXY_TYPE == "SOCKS5":

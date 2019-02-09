@@ -10,4 +10,4 @@ progressbar2
 requests
 asyncssh
 aiohttp
-git+https://github.com/tulir/telethon-session-sqlalchemy
+telethon-session-sqlalchemy
