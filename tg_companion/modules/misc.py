@@ -68,7 +68,7 @@ async def user_info(e):
     user_id = full_user.user.id
     common_chats = full_user.common_chats_count
 
-    REPLY = "**User Info:**\n"
+    REPLY = "<b>User Info:</b>\n"
 
     REPLY += f"\nFirst Name: {firstName}"
 
@@ -76,14 +76,14 @@ async def user_info(e):
         REPLY += f"\nLast Name: {lastName}"
     if username:
         REPLY += f"\nUsername: @{username}"
-    REPLY += f"\nPermanent user link: [link](tg://user?id={user_id})"
+    REPLY += f"\nPermanent user link: <a href=\"tg://user?id={user_id}\">link</a>"
     if full_user.about:
-        REPLY += f"\n\n**About User:**\n{full_user.about}"
+        REPLY += f"\n\n<b>About User:</b>\n{full_user.about}"
     if not full_user.user.is_self:
-        REPLY += f"\n\nYou have `{common_chats}` chats in common with this user"
+        REPLY += f"\n\nYou have <code>{common_chats}</code> chats in common with this user"
 
     await client.send_message(
-        chat.id, REPLY, reply_to=message.id, link_preview=True, file=full_user.profile_photo
+        chat.id, REPLY, reply_to=message.id, link_preview=False, file=full_user.profile_photo, parse_mode="html"
     )
 
 
