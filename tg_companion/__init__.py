@@ -32,7 +32,8 @@ CONFIG_VALUES = [
     "APP_HASH          : (required) Your telegram app hash from https://my.telegram.org/apps",
     "DB_URI            : (required) Your postgress database url. Leave empty to disable the modules that use it",
     "DEBUG             : (optional) Set True if you want to generate log files from exceptions",
-    "STATS_TIMER       : (optional) Update stats every x seconds. Default = 3600 seconds. Set to 0 to disable",
+    "STATS_TIMER       : (optional) Update stats every x seconds. Default = 3600 seconds. Set to 0 to disable"
+                            "WARNING: If enabled the companion will not respond to your commands for 5 seconds when starting the bot for the first time",
     "BLOCK_PM          : (optional) Set to True if you want to block new PMs. New PMs will be deleted and user blocked",
     "NOPM_SPAM         : (optional) Set to True if you want to block users that are spamming your PMs.",
     "SUBPROCESS_ANIM   : (optional) Set to True if you want to enable animations when using a terminal command."

@@ -1,5 +1,5 @@
 from tg_companion import STATS_TIMER
-from tg_companion.tgclient import DB_URI, client
+from tg_companion.tgclient import DB_URI, LOGGER, client
 from telethon import events
 from telethon import utils
 from telethon.tl.functions.channels import GetFullChannelRequest
@@ -79,18 +79,21 @@ async def GetStats():
         FirstTimeRunning = True
 
     if FirstRun:
-        print(
+        LOGGER.info(
             "Gathering Stats. You'll be able to use this app during this process without problems"
         )
-        print("You can disable this in the config.env file")
+        LOGGER.info("The companion may not respond to your command for 5 second. Don't panic and try again if your command didn't worked")
+
+        LOGGER.info("You can disable this in the config.env file")
 
         if FirstTimeRunning:
-            print(
+            LOGGER.info(
                 "Because this is your first time running this, the .stats command won't work until this process isn't over"
             )
 
     else:
-        print("Updating Stats...")
+        LOGGER.info("Updating Stats...")
+        LOGGER.info("The companion may not respond to your command for 5 second. Don't panic and try again if your command didn't worked")
 
     CachedSupergroups = []
 
@@ -263,7 +266,7 @@ async def GetStats():
     connection.execute(query)
     connection.close()
 
-    print("DONE!! You can see your stats by sending .stats in any chat")
+    LOGGER.info("DONE!! You can see your stats by sending .stats in any chat")
 
 
 @client.on(events.NewMessage(outgoing=True, pattern=r"^\.stats"))

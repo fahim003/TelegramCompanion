@@ -59,6 +59,7 @@ pip3 install -r requirements.txt
 > -   `SESSION_NAME` = (optional) Custom session name. Leave empty to use the default session name
 >
 > -   `STATS_TIMER` = (optional) Set the stats update time in seconds. Set it to 0 to completly disable stats.
+>     - **WARNING** : If enabled the companion will not respond to your commands for 5 seconds when starting the bot for the first time
 >
 > -   `SUBPROCESS_ANIM` = (optional) (optional) Set to True if you want to enable animations when using a terminal command.
 >     -   **WARNING** : When executing commands with long outputs it might trigger a flood wait that will restrict you from editing any send messages for a given time. Usualy just 250 seconds."
