@@ -1,0 +1,22 @@
+language: python
+
+python:
+  - "3.7-dev"
+
+install:
+  - pip3 install -r requirements.txt
+
+before_script:
+  - chmod +x deploy.sh
+  - chmod +x changelog.sh
+
+branches:
+  only:
+    - travis-test
+
+script:
+
+  - python3 -m tg_companion
+
+after_success:
+  - ./deploy.sh

@@ -91,6 +91,8 @@ SSH_PASSWORD = os.environ.get('SSH_PASSWORD', None)
 SSH_PASSPHRASE = os.environ.get('SSH_PASSPHRASE', None)
 SSH_KEY = os.environ.get('SSH_KEY', None)
 
+TRAVIS = os.environ.get("TEST_BUILD", False)
+
 proxy = None
 proxy_type = None
 proxy_addr = HOST

@@ -1,8 +1,7 @@
 import asyncio
 import importlib
-import argparse
 import re
-from tg_companion import LOGGER, TO_INSTALL, proxy
+from tg_companion import LOGGER, TO_INSTALL, TRAVIS, proxy
 from tg_companion.modules import MODULES
 from tg_companion.plugins import PLUGINS, PluginManager
 from tg_companion.tgclient import client
@@ -15,11 +14,17 @@ for plugin_name in PLUGINS:
     imported_plugin = importlib.import_module(
         "tg_companion.plugins." + plugin_name)
 
+
+while client.is_connected() and TRAVIS:
+    client.disconnect()
+
 if proxy:
     LOGGER.info(f"Connecting to Telegram over proxy: {proxy[1]}:{proxy[2]}")
     LOGGER.info("Use .ping in any chat to see if your userbot has connected.")
 else:
     LOGGER.info("Your userbot is running. Type .ping in any chat to test it")
+
+
 
 
 loop = asyncio.get_event_loop()
@@ -41,4 +46,5 @@ if __name__ == "__main__":
             loop.run_until_complete(
                 PluginManager.download_plugins(
                     plugin=TO_INSTALL))
+
     client.run_until_disconnected()
