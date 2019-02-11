@@ -72,6 +72,9 @@ class CompanionClient(TelegramClient):
 
     async def send_from_disk(self, event, path, caption=None, force_document=False, use_cache=None, reply_to=None):
         if os.path.isfile(path):
+            if os.path.getsize(path) >= 1500000000:
+                await event.edit("`File size too big. Max 1.5GB.`")
+                return
             f_name = os.path.basename(path)
             f_size, unit = self.convert_file_size(os.path.getsize(f_name))
             await event.edit(
@@ -85,8 +88,16 @@ class CompanionClient(TelegramClient):
             await event.delete()
 
         elif os.path.isdir(path):
-            d_name = os.path.dirname(path)
             d_size = 0
+            for dirpath, dirnames, filenames in os.walk(path):
+                for f in filenames:
+                    fp = os.path.join(dirpath, f)
+                    d_size += os.path.getsize(fp)
+                    if d_size >= 1500000000:
+                        await event.edit("`Folder size too big. Max 1.5GB`")
+                        return
+
+            d_name = os.path.dirname(path)
 
             try:
                 with io.BytesIO() as memzip:
@@ -94,7 +105,6 @@ class CompanionClient(TelegramClient):
                         await event.edit("Processing ZipFile from folder")
                         for file in os.listdir(path):
                             zf.write(f"{path}{file}")
-                            d_size = d_size + os.path.getsize(f"{path}{file}")
 
                     memzip.name = f"{d_name}.zip"
                     memzip.seek(0)
