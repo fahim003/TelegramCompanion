@@ -64,7 +64,7 @@ class CompanionClient(TelegramClient):
                     elif isinstance(exc, SessionPasswordNeededError):
                         password = getpass(
                             "Two step verification is enabled. Please enter your password: ")
-                            
+
                         self_user = loop.run_until_complete(
                             self.sign_in(password=password))
 
@@ -76,13 +76,13 @@ class CompanionClient(TelegramClient):
             f_size, unit = self.convert_file_size(os.path.getsize(f_name))
             await event.edit(
                 f"**Uploading**:\n\n"
-                f"  __Folder Name:__ `{f_name}`\n"
+                f"  __File Name:__ `{f_name}`\n"
                 f"  __Size__: `{f_size}` {unit}\n"
             )
 
             await self.send_file(event.chat_id, path, file_name=f_name,
                                  force_document=force_document, reply_to=reply_to, progress_callback=None)
-            await event.edit()
+            await event.delete()
 
         elif os.path.isdir(path):
             d_name = os.path.dirname(path)
