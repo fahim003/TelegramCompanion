@@ -24,7 +24,6 @@ metadata.create_all(
     tables=[private_messages_tbl],
     checkfirst=True)
 
-db.insert(private_messages_tbl).values(chat_id=0)
 query = db.select([private_messages_tbl])
 load_privates = connection.execute(query).fetchall()
 for row in load_privates:
@@ -73,5 +72,6 @@ async def accept_permission(e):
             connection = engine.connect()
             query = db.insert(private_messages_tbl).values(chat_id = chat.id)
             ACCEPTED_USERS.append(chat.id)
+            connection.execute(query)
             connection.close()
             await e.edit("Private Message Accepted")
