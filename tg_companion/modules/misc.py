@@ -81,7 +81,7 @@ async def user_info(e):
     if full_user.about:
         REPLY += f"\n\n<b>About User:</b>\n{escape(full_user.about)}"
     if not full_user.user.is_self:
-        REPLY += f"\n\nYou have <code>{escape(common_chats)}</code> chats in common with this user"
+        REPLY += f"\n\nYou have <code>{common_chats}</code> chats in common with this user"
 
     await client.send_message(
         chat.id, REPLY, reply_to=message.id, link_preview=False, file=full_user.profile_photo, parse_mode="html"
