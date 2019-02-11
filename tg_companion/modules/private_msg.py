@@ -30,8 +30,15 @@ for row in load_privates:
     if row:
         ACCEPTED_USERS.append(row[0])
 
+@client.on(events.NewMessage(incoming=True, func=lambda x: BLOCK_PM))
 
-@client.on(events.NewMessage(incoming=True))
+async def block_pm(e):
+    if BLOCK_PM:
+        chat = await e.get_chat()
+        if chat.id not in ACCEPTED_USERS:
+            await client(BlockRequest(chat.id))
+
+@client.on(events.NewMessage(incoming=True, func=lambda x: not BLOCK_PM))
 @client.log_exception
 async def await_permission(e):
     global PM_WARNS
@@ -64,14 +71,15 @@ async def await_permission(e):
 @client.log_exception
 async def accept_permission(e):
     chat = await e.get_chat()
-    if NOPM_SPAM and e.is_private:
-        if chat.id not in ACCEPTED_USERS:
+    if NOPM_SPAM or BLOCK_PM:
+        if e.is_private:
+            if chat.id not in ACCEPTED_USERS:
 
-            if chat.id in PM_WARNS:
-                del PM_WARNS[chat.id]
-            connection = engine.connect()
-            query = db.insert(private_messages_tbl).values(chat_id = chat.id)
-            ACCEPTED_USERS.append(chat.id)
-            connection.execute(query)
-            connection.close()
-            await e.edit("Private Message Accepted")
+                if chat.id in PM_WARNS:
+                    del PM_WARNS[chat.id]
+                connection = engine.connect()
+                query = db.insert(private_messages_tbl).values(chat_id = chat.id)
+                ACCEPTED_USERS.append(chat.id)
+                connection.execute(query)
+                connection.close()
+                await e.edit("Private Message Accepted")
