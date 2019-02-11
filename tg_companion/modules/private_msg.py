@@ -38,7 +38,7 @@ async def await_permission(e):
     global PM_WARNS
     global ACCEPTED_USERS
 
-    if NOPM_SPAM is True and e.is_private:
+    if NOPM_SPAM and e.is_private:
         chat = await e.get_chat()
         if chat.id not in ACCEPTED_USERS:
 
@@ -48,14 +48,14 @@ async def await_permission(e):
             if PM_WARNS[chat.id] == 3:
                 await client.send_message(
                     chat.id,
-                    message="You are spamming this user. I will ban you until he decides to unban you. Thanks ",
+                    message="You are spamming this user. I will ban you until he decides to unban you. Thanks "
                 )
                 await client(BlockRequest(chat.id))
                 return
 
             await client.send_message(
                 chat.id,
-                message="`Hi! This user will answer to your message soon. Please wait for his response and don't spam his PM. Thanks`",
+                message="`Hi! This user will answer to your message soon. Please wait for his response and don't spam his PM. Thanks`"
             )
 
             PM_WARNS[chat.id] += 1
@@ -65,7 +65,7 @@ async def await_permission(e):
 @client.log_exception
 async def accept_permission(e):
     chat = await e.get_chat()
-    if NOPM_SPAM is True and e.is_private:
+    if NOPM_SPAM and e.is_private:
         if chat.id not in ACCEPTED_USERS:
 
             if chat.id in PM_WARNS:
