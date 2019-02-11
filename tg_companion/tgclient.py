@@ -1,20 +1,20 @@
 import asyncio
 import inspect
-import os
 import io
+import os
 import sys
 import zipfile
 from datetime import datetime
+from getpass import getpass
 
 from alchemysession import AlchemySessionContainer
 from telethon import TelegramClient
 from telethon.errors import SessionPasswordNeededError
 from telethon.errors.rpcerrorlist import PhoneCodeInvalidError
 
-from tg_companion import APP_HASH, APP_ID, DB_URI, DEBUG, SESSION_NAME, LOGGER, proxy
+from tg_companion import (APP_HASH, APP_ID, DB_URI, DEBUG, LOGGER,
+                          SESSION_NAME, proxy)
 from tg_companion._version import __version__
-from getpass import getpass
-
 
 loop = asyncio.get_event_loop()
 
@@ -60,7 +60,8 @@ class CompanionClient(TelegramClient):
                         self.sign_in(code=code))
                 except Exception as exc:
                     if isinstance(exc, PhoneCodeInvalidError):
-                        code = input("The phone code entered was invalid. Try again: ")
+                        code = input(
+                            "The phone code entered was invalid. Try again: ")
                     elif isinstance(exc, SessionPasswordNeededError):
                         password = getpass(
                             "Two step verification is enabled. Please enter your password: ")

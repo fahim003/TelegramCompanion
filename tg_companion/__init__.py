@@ -25,7 +25,9 @@ parser.add_argument(
     "--config", help="Display all the config variables", action="store_true"
 )
 
-parser.add_argument("--install", help="Install any given plugin. Usage: --install <pluginname> or <user/repo/plugin_name>.")
+parser.add_argument(
+    "--install",
+    help="Install any given plugin. Usage: --install <pluginname> or <user/repo/plugin_name>.")
 
 CONFIG_VALUES = [
     "APP_ID            : (required) Your telegram app id from https://my.telegram.org/apps",
@@ -33,11 +35,11 @@ CONFIG_VALUES = [
     "DB_URI            : (required) Your postgress database url. Leave empty to disable the modules that use it",
     "DEBUG             : (optional) Set True if you want to generate log files from exceptions",
     "STATS_TIMER       : (optional) Update stats every x seconds. Default = 3600 seconds. Set to 0 to disable"
-                            "WARNING: If enabled the companion will not respond to your commands for 5 seconds when starting the bot for the first time",
+    "WARNING: If enabled the companion will not respond to your commands for 5 seconds when starting the bot for the first time",
     "BLOCK_PM          : (optional) Set to True if you want to block new PMs. New PMs will be deleted and user blocked",
     "NOPM_SPAM         : (optional) Set to True if you want to block users that are spamming your PMs.",
     "SUBPROCESS_ANIM   : (optional) Set to True if you want to enable animations when using a terminal command."
-                            "WARNING: When executing commands with long outputs it might trigger a flood wait that will restrict you from editing any send messages for a given time. Usualy just 250 seconds."
+    "WARNING: When executing commands with long outputs it might trigger a flood wait that will restrict you from editing any send messages for a given time. Usualy just 250 seconds."
     "PROXY_TYPE        : (optional) Your proxy type HTTP/SOCKS4/SOCKS5. Leave empty to disable proxy.",
     "HOST              : (optional) The host of the used proxy.",
     "PORT              : (optional) The port of the used proxy.",

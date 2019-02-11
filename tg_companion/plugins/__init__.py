@@ -97,7 +97,8 @@ class PluginManager:
                 LOGGER.info(f"Installed {plugin}")
                 LOGGER.info(f"Plugin {plugin} Installed")
 
-                LOGGER.info(f"Please restart the companion to load the new installed plugins")
+                LOGGER.info(
+                    f"Please restart the companion to load the new installed plugins")
 
 
 PLUGINS = sorted(PluginManager.load_plugins())

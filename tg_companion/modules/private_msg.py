@@ -1,9 +1,9 @@
+import sqlalchemy as db
 from telethon import events
 from telethon.tl.functions.contacts import BlockRequest
 
 from tg_companion import BLOCK_PM, NOPM_SPAM
-from tg_companion.tgclient import client, DB_URI
-import sqlalchemy as db
+from tg_companion.tgclient import DB_URI, client
 
 PM_WARNS = {}
 
@@ -30,13 +30,14 @@ for row in load_privates:
     if row:
         ACCEPTED_USERS.append(row[0])
 
-@client.on(events.NewMessage(incoming=True, func=lambda x: BLOCK_PM))
 
+@client.on(events.NewMessage(incoming=True, func=lambda x: BLOCK_PM))
 async def block_pm(e):
     if BLOCK_PM:
         chat = await e.get_chat()
         if chat.id not in ACCEPTED_USERS:
             await client(BlockRequest(chat.id))
+
 
 @client.on(events.NewMessage(incoming=True, func=lambda x: not BLOCK_PM))
 @client.log_exception
@@ -78,7 +79,7 @@ async def accept_permission(e):
                 if chat.id in PM_WARNS:
                     del PM_WARNS[chat.id]
                 connection = engine.connect()
-                query = db.insert(private_messages_tbl).values(chat_id = chat.id)
+                query = db.insert(private_messages_tbl).values(chat_id=chat.id)
                 ACCEPTED_USERS.append(chat.id)
                 connection.execute(query)
                 connection.close()

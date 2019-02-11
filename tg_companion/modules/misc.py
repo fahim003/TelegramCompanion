@@ -4,10 +4,10 @@ import platform
 import re
 import sys
 import time
+from html import escape
 
 import aiohttp
 import telethon
-from html import escape
 from telethon import events
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import User
@@ -138,7 +138,6 @@ async def rextestercli(e):
 @client.on(events.NewMessage(outgoing=True, pattern=r"^\.sendlog"))
 @client.log_exception
 async def send_logs(e):
-
 
     chat = await e.get_chat()
 

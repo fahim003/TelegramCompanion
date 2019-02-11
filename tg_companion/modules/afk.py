@@ -1,6 +1,6 @@
 from telethon import events
-from tg_companion.tgclient import client
 
+from tg_companion.tgclient import client
 
 USER_AFK = {}
 

@@ -102,6 +102,10 @@ pip3 install -r requirements.txt
 >
 > #### Available commands are:
 >
+> -   `.plugins` - Get a list with your installed plugins
+>
+> -   `.plugin` `<plugin_name>` - Get plugin info for a specified plugin
+>
 > -   `.afk` `<optional-reason>` - Sets you as afk and tells everyone that you are away by sending them a message when they mention your username, sends you a PM or replies to your message. Send a message to any chat to dismiss your afk state
 >
 > -   `.ppic` - Reply to a photo/document to set it as your profile photo

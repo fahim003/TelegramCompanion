@@ -1,7 +1,7 @@
 import asyncio
 import importlib
-import argparse
 import re
+
 from tg_companion import LOGGER, TO_INSTALL, proxy
 from tg_companion.modules import MODULES
 from tg_companion.plugins import PLUGINS, PluginManager

@@ -1,13 +1,12 @@
+import time
+
+import progressbar
+import sqlalchemy as db
+from telethon import events, utils
+from telethon.tl.functions.channels import GetFullChannelRequest
+
 from tg_companion import STATS_TIMER
 from tg_companion.tgclient import DB_URI, LOGGER, client
-from telethon import events
-from telethon import utils
-from telethon.tl.functions.channels import GetFullChannelRequest
-import sqlalchemy as db
-
-import time
-import progressbar
-
 
 engine = db.create_engine(DB_URI)
 metadata = db.MetaData()
@@ -82,7 +81,8 @@ async def GetStats():
         LOGGER.info(
             "Gathering Stats. You'll be able to use this app during this process without problems"
         )
-        LOGGER.info("The companion may not respond to your command for 5 second. Don't panic and try again if your command didn't worked")
+        LOGGER.info(
+            "The companion may not respond to your command for 5 second. Don't panic and try again if your command didn't worked")
 
         LOGGER.info("You can disable this in the config.env file")
 
@@ -93,7 +93,8 @@ async def GetStats():
 
     else:
         LOGGER.info("Updating Stats...")
-        LOGGER.info("The companion may not respond to your command for 5 second. Don't panic and try again if your command didn't worked")
+        LOGGER.info(
+            "The companion may not respond to your command for 5 second. Don't panic and try again if your command didn't worked")
 
     CachedSupergroups = []
 

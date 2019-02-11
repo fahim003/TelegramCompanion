@@ -3,10 +3,10 @@ import os
 import re
 
 from telethon import errors, events
-from telethon.tl.functions.messages import (EditChatAboutRequest, EditChatPhotoRequest,
-                                            EditChatTitleRequest)
-
 from telethon.tl.functions.channels import UpdateUsernameRequest
+from telethon.tl.functions.messages import (EditChatAboutRequest,
+                                            EditChatPhotoRequest,
+                                            EditChatTitleRequest)
 from telethon.tl.types import MessageMediaDocument, MessageMediaPhoto
 
 from tg_companion.tgclient import client

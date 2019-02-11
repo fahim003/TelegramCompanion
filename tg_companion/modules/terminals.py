@@ -6,7 +6,8 @@ import asyncssh
 from telethon import events
 
 from tg_companion import (ENABLE_SSH, SSH_HOSTNAME, SSH_KEY, SSH_PASSPHRASE,
-                          SSH_PASSWORD, SSH_PORT, SSH_USERNAME, SUBPROCESS_ANIM)
+                          SSH_PASSWORD, SSH_PORT, SSH_USERNAME,
+                          SUBPROCESS_ANIM)
 from tg_companion.tgclient import client
 
 
@@ -34,7 +35,6 @@ async def terminal(e):
 
         await e.edit(f"{OUTPUT}`{stdout.decode()}`")
         return
-
 
     while process:
         if time.time() > start_time:
