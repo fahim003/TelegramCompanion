@@ -61,16 +61,17 @@ async def await_permission(e):
             PM_WARNS[chat.id] += 1
 
 
-@client.on(events.NewMessage(outgoing=True))
+@client.on(events.NewMessage(outgoing=True, pattern=".approve"))
 @client.log_exception
 async def accept_permission(e):
     chat = await e.get_chat()
+    if NOPM_SPAM is True and e.is_private:
+        if chat.id not in ACCEPTED_USERS:
 
-    if chat.id not in ACCEPTED_USERS:
-
-        if chat.id in PM_WARNS:
-            del PM_WARNS[chat.id]
-        connection = engine.connect()
-        query = db.insert(private_messages_tbl).values(chat_id = chat.id    )
-        ACCEPTED_USERS.append(chat.id)
-        connection.close()
+            if chat.id in PM_WARNS:
+                del PM_WARNS[chat.id]
+            connection = engine.connect()
+            query = db.insert(private_messages_tbl).values(chat_id = chat.id)
+            ACCEPTED_USERS.append(chat.id)
+            connection.close()
+            await e.edit("Private Message Accepted")
